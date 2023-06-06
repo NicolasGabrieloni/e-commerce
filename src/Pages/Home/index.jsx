@@ -1,26 +1,28 @@
 import { useContext } from "react";
+import { ShoppingCartContext } from "../../Context";
+import { useAuth } from "../../Components/auth";
 import Layout from "../../Components/Layout";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
-import { ShoppingCartContext } from "../../Context";
+import SingIn from "../SingIn";
 
 function Home() {
   const context = useContext(ShoppingCartContext);
+  const auth = useAuth();
 
   const renderView = () => {
-      if (context.filteredItems?.length > 0) {
-        return (
-          context.filteredItems?.map((item) => (
-          <Card key={item.id} data={item} />
-        ))
-      )
-      } else {
-        return (
-        <div>We don't have anything :/</div>
-        )
-      }
+    if (context.filteredItems?.length > 0) {
+      return context.filteredItems?.map((item) => (
+        <Card key={item.id} data={item} />
+      ));
+    } else {
+      return <div>We don't have anything :/</div>;
+    }
   };
 
+  {
+    if (!auth.user) return <SingIn />;
+  }
   return (
     <Layout>
       <div className="flex items-center justify-center relative w-80 mb-4">
