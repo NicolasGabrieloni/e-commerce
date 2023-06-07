@@ -1,12 +1,13 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
 import { ShoppingCartProvider } from "../../Context";
-import { AuthProvider } from "../../Components/auth";
+import { AuthProvider, AuthRoute } from "../../Components/auth";
 import Home from "../Home";
 import MyAccount from "../MyAccount";
 import MyOrder from "../MyOrder";
 import MyOrders from "../MyOrders";
 import NotFound from "../NotFound";
 import SingIn from "../SingIn";
+import SingUp from "../../Components/Singup";
 import Navbar from "../../Components/Navbar";
 import CheckoutSideMenu from "../../Components/CheckoutSideMenu";
 import "./App.css";
@@ -19,12 +20,48 @@ const AppRoutes = () => {
     { path: "/furnitures", element: <Home /> },
     { path: "/toys", element: <Home /> },
     { path: "/others", element: <Home /> },
-    { path: "/my-account", element: <MyAccount /> },
-    { path: "/my-order", element: <MyOrder /> },
-    { path: "/my-orders", element: <MyOrders /> },
-    { path: "/my-orders/last", element: <MyOrder /> },
-    { path: "/my-orders/:id", element: <MyOrder /> },
+    {
+      path: "/my-account",
+      element: (
+        <AuthRoute>
+          <MyAccount />
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/my-order",
+      element: (
+        <AuthRoute>
+          <MyOrder />
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/my-orders",
+      element: (
+        <AuthRoute>
+          <MyOrders />
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/my-orders/last",
+      element: (
+        <AuthRoute>
+          <MyOrder />
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/my-orders/:id",
+      element: (
+        <AuthRoute>
+          <MyOrder />
+        </AuthRoute>
+      ),
+    },
     { path: "/sing-in", element: <SingIn /> },
+    { path: "/sing-up", element: <SingUp /> },
     { path: "/*", element: <NotFound /> },
   ]);
   return routes;
