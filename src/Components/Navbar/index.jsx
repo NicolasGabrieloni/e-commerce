@@ -10,7 +10,7 @@ const Navbar = () => {
   const auth = useAuth();
 
   {
-    if (!auth.user)
+    if (!auth.autentic)
       return (
         <nav className="flex justify-between item-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light">
           <ul className="flex items-center gap-3">
@@ -165,7 +165,7 @@ const Navbar = () => {
         </li>
       </ul>
       <ul className="flex items-center gap-3">
-        <li className="text-black/60">{auth.user.username}</li>
+        <li className="text-black/60">asd</li>
         <li>
           <NavLink
             to="/my-orders"

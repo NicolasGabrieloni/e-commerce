@@ -21,7 +21,7 @@ function Home() {
   };
 
   {
-    if (!auth.user) return <SingIn />;
+    if (!auth.autentic) return <SingIn />;
   }
   return (
     <Layout>

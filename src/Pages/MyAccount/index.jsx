@@ -7,7 +7,7 @@ function MyAccount() {
   return (
     <Layout>
       <h1 className="font-medium text-xl mb-4">Welcome</h1>
-      {auth.user.username}
+       fachero del carajo
     </Layout>
   );
 }

@@ -1,36 +1,17 @@
 import Layout from "../../Components/Layout";
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Components/auth";
 
 function SingUp() {
-  const form = useRef(null);
-  const navigate = useNavigate();
-
-  const createAccount = () => {
-    const formData = new FormData(form.current);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
-    data.name === "" | data.email === "" | data.password === ""
-      ? alert("please complete the data")
-      : saveData(data)
-        navigate("/");
-        console.log(data)
-  };
-
-  const saveData = (data) => {
-    localStorage.setItem("name", data.name);
-    localStorage.setItem("email", data.email);
-    localStorage.setItem("password", data.password);
-  };
+  const auth = useAuth();
 
   return (
     <Layout>
       <div className="flex flex-col items-center w-80">
         <h2 className="text-medium font-bold text-xl">Welcome</h2>
-        <form ref={form} className="flex flex-col mb-6 mt-6 w-full">
+        <form
+          onSubmit={auth.handleSubmit}
+          className="flex flex-col mb-6 mt-6 w-full"
+        >
           <div className="flex flex-col mb-4">
             <label className="mr-4" htmlFor="name">
               Your name:
@@ -41,6 +22,7 @@ function SingUp() {
               type="text"
               id="name"
               name="name"
+              onChange={auth.handleChange}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -53,6 +35,7 @@ function SingUp() {
               type="email"
               id="email"
               name="email"
+              onChange={auth.handleChange}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -65,10 +48,10 @@ function SingUp() {
               type="password"
               id="password"
               name="password"
+              onChange={auth.handleChange}
             />
           </div>
           <button
-            onClick={() => createAccount()}
             type="submit"
             className="bg-black w-full h-12 mb-4 text-white rounded-lg"
           >
@@ -79,5 +62,4 @@ function SingUp() {
     </Layout>
   );
 }
-
 export default SingUp;

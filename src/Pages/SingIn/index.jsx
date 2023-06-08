@@ -1,43 +1,34 @@
 import Layout from "../../Components/Layout";
-import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../Components/auth";
 import { NavLink } from "react-router-dom";
 
 function SingIn() {
   const auth = useAuth();
-  const [username, setUsername] = useState("");
-
-  const login = (e) => {
-    e.preventDefault();
-    username === ""
-      ? alert("please complete the data")
-      : auth.login({ username });
-  };
 
   const singUp = () => {
     return <Navigate to="/sing-up" />;
   };
 
-  if (auth.user) {
-    return <Navigate to="/sing-up" />;
-  }
+  // if (auth.name) {
+  //   return <Navigate to="/sing-up" />;
+  // }
 
   return (
     <Layout>
       <div className="flex flex-col items-center w-80">
         <h2 className="text-medium font-bold text-xl">Welcome</h2>
-        <form className="flex flex-col mb-6 mt-6 w-80" onSubmit={login}>
+        <form className="flex flex-col mb-6 mt-6 w-80" onSubmit={auth.login}>
           <div>
             <label className="mr-4" htmlFor="email">
               Email:
             </label>
             <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={auth.handleChange}
               className="outline-none mb-2"
               type="text"
               id="email"
+              name="email"
             />
           </div>
           <div>
@@ -45,9 +36,11 @@ function SingIn() {
               Password:
             </label>
             <input
+              onChange={auth.handleChange}
               className="outline-none mb-6"
               type="password"
               id="password"
+              name="password"
             />
           </div>
           <button
