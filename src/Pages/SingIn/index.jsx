@@ -1,6 +1,7 @@
 import Layout from "../../Components/Layout";
 import { useAuth } from "../../Components/auth";
 import { NavLink } from "react-router-dom";
+import "./style.css";
 
 function SingIn() {
   const auth = useAuth();
@@ -28,11 +29,17 @@ function SingIn() {
             </label>
             <input
               onChange={auth.handleChange}
-              className="outline-none mb-6"
+              className="outline-none mb-3"
               type="password"
               id="password"
               name="password"
             />
+             <p className={auth.incorrectData ? "text-sm text-center mb-3 text-red-600" : "hidden"}>
+              incorrect email or password 
+            </p>
+            <p className={auth.emptyData ? "text-sm text-center mb-3 text-red-600" : "hidden"}>
+              Please complete the form
+            </p>
           </div>
           <button
             type="submit"

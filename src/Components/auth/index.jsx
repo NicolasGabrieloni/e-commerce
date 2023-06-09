@@ -8,6 +8,10 @@ const AuthProvider = ({ children }) => {
 
   const [autentic, setAutentic] = useState(false);
 
+  const [incorrectData, setIncorrectData] = useState(false);
+
+  const [emptyData, setEmptyData] = useState(false);
+
   const [formData, setFormData] = useState(() => {
     const storedData = JSON.parse(localStorage.getItem("formData"));
     return storedData || { name: "", email: "", password: "" };
@@ -42,15 +46,23 @@ const AuthProvider = ({ children }) => {
         setAutentic(true);
         navigate("/");
       } else {
-        console.error("Error de autenticación");
+        setIncorrectData(true);
       }
     } else {
-      console.log("Por favor, completa todos los campos del formulario");
+      setEmptyData(true);
     }
   };
 
   const logout = () => {
+    setFormData({
+      ...formData,
+      name: "",
+      email: "",
+      password: "",
+    });
     setAutentic(false);
+    setIncorrectData(false);
+    setEmptyData(false);
   };
 
   const handleEdit = (e) => {
@@ -58,7 +70,7 @@ const AuthProvider = ({ children }) => {
     if (formData.name && formData.email && formData.password) {
       localStorage.setItem("formData", JSON.stringify(formData));
     } else {
-      alert("Por favor, completa todos los campos del formulario");
+      alert("Please complete all the fields of the form");
     }
     navigate("/my-account");
   };
@@ -71,6 +83,8 @@ const AuthProvider = ({ children }) => {
     autentic,
     storedFormData: formData,
     handleEdit,
+    incorrectData,
+    emptyData,
   };
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
