@@ -7,7 +7,6 @@ import Layout from "../../Components/Layout";
 function MyOrders() {
   const context = useContext(ShoppingCartContext);
 
-
   return (
     <Layout>
       <div className="flex items-center justify-center w-80 relative">
@@ -19,7 +18,6 @@ function MyOrders() {
             totalPrice={order.totalPrice}
             totalProducts={order.totalProducts}
           />
-          ;
         </Link>
       ))}
     </Layout>

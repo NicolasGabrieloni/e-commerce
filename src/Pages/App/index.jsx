@@ -8,6 +8,7 @@ import MyOrders from "../MyOrders";
 import NotFound from "../NotFound";
 import SingIn from "../SingIn";
 import SingUp from "../../Components/Singup";
+import EditAccount from "../../Components/EditAccount";
 import Navbar from "../../Components/Navbar";
 import CheckoutSideMenu from "../../Components/CheckoutSideMenu";
 import "./App.css";
@@ -62,6 +63,7 @@ const AppRoutes = () => {
     },
     { path: "/sing-in", element: <SingIn /> },
     { path: "/sing-up", element: <SingUp /> },
+    { path: "/edit-account", element: <EditAccount /> },
     { path: "/*", element: <NotFound /> },
   ]);
   return routes;

@@ -1,18 +1,9 @@
 import Layout from "../../Components/Layout";
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../../Components/auth";
 import { NavLink } from "react-router-dom";
 
 function SingIn() {
   const auth = useAuth();
-
-  const singUp = () => {
-    return <Navigate to="/sing-up" />;
-  };
-
-  // if (auth.name) {
-  //   return <Navigate to="/sing-up" />;
-  // }
 
   return (
     <Layout>
@@ -51,10 +42,7 @@ function SingIn() {
           </button>
         </form>
         <p className="mb-6 border-b border-black text-xs">Forgot my password</p>
-        <button
-          onClick={singUp}
-          className="w-full h-12 mb-4 border border-black rounded-lg"
-        >
+        <button className="w-full h-12 mb-4 border border-black rounded-lg">
           <NavLink to="/sing-up">Sing Up</NavLink>
         </button>
       </div>

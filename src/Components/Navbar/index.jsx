@@ -165,7 +165,7 @@ const Navbar = () => {
         </li>
       </ul>
       <ul className="flex items-center gap-3">
-        <li className="text-black/60">asd</li>
+        <li className="text-black/60">{auth.storedFormData?.email}</li>
         <li>
           <NavLink
             to="/my-orders"
@@ -191,7 +191,9 @@ const Navbar = () => {
             Sing Out
           </NavLink>
         </li>
-        <li className="flex items-center">
+        <li 
+        onClick={context.openCheckoutSideMenu}
+        className="flex items-center cursor-pointer">
           <ShoppingBagIcon className="h-6 w-6" />
           {context.cartProduct.length}
         </li>

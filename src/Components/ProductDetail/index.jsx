@@ -24,11 +24,14 @@ const ProductDetail = () => {
         </div>
       </div>
       <figure className="px-6">
-        <img
-          className="w-full h-full rounded-lg"
-          src={context.productShow.images}
-          alt={context.productShow.title}
-        />
+        {context.productShow.images &&
+          context.productShow.images.length > 0 && (
+            <img
+              className="w-full h-full rounded-lg"
+              src={context.productShow.images[0]}
+              alt={context.productShow.title}
+            />
+          )}
       </figure>
       <p className="flex flex-col p-6">
         <span className="font-medium text-2xl mb-2">

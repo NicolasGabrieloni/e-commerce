@@ -7,12 +7,10 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const [autentic, setAutentic] = useState(false);
-  console.log(autentic);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const [formData, setFormData] = useState(() => {
+    const storedData = JSON.parse(localStorage.getItem("formData"));
+    return storedData || { name: "", email: "", password: "" };
   });
 
   const handleChange = (e) => {
@@ -26,13 +24,11 @@ const AuthProvider = ({ children }) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.password) {
       localStorage.setItem("formData", JSON.stringify(formData));
-
-      console.log("Usuario registrado exitosamente");
     } else {
-      console.log("Por favor, completa todos los campos del formulario");
+      alert("Please, complete all the fields of the form");
     }
     navigate("/sing-in");
-    alert("usuario registrado, porfavor identifiquese");
+    alert("You are already registered, enter again");
   };
 
   const login = (e) => {
@@ -54,15 +50,28 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-    });
     setAutentic(false);
   };
 
-  const auth = { login, logout, handleChange, handleSubmit, autentic };
+  const handleEdit = (e) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.password) {
+      localStorage.setItem("formData", JSON.stringify(formData));
+    } else {
+      alert("Por favor, completa todos los campos del formulario");
+    }
+    navigate("/my-account");
+  };
+
+  const auth = {
+    login,
+    logout,
+    handleChange,
+    handleSubmit,
+    autentic,
+    storedFormData: formData,
+    handleEdit,
+  };
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
